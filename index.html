@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jennifer Shalom — AI/ML Engineer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #0B0B14;
+    --panel: rgba(255,255,255,0.04);
+    --panel-line: rgba(255,255,255,0.09);
+    --text: #ECEBF5;
+    --muted: #9A97B5;
+    --violet: #8B7CFF;
+    --teal: #3FDCC8;
+    --coral: #FF8A65;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{ background: var(--bg); color: var(--text); font-family:'Inter',sans-serif; line-height:1.6; overflow-x:hidden; position:relative; }
+  ::selection{ background: var(--violet); color: #fff; }
+  a{ color: inherit; text-decoration:none; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  /* Animated aurora background */
+  .aurora{ position:fixed; inset:0; z-index:0; overflow:hidden; filter: blur(80px); opacity:0.55; }
+  .blob{ position:absolute; border-radius:50%; }
+  .blob-1{ width:520px; height:520px; background: radial-gradient(circle, var(--violet), transparent 70%); top:-150px; left:-100px; animation: float1 18s ease-in-out infinite; }
+  .blob-2{ width:600px; height:600px; background: radial-gradient(circle, var(--teal), transparent 70%); bottom:-200px; right:-150px; animation: float2 22s ease-in-out infinite; }
+  .blob-3{ width:420px; height:420px; background: radial-gradient(circle, var(--coral), transparent 70%); top:40%; left:50%; animation: float3 26s ease-in-out infinite; }
+
+  @keyframes float1{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(80px,60px) scale(1.15); }
+  }
+  @keyframes float2{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-70px,-50px) scale(1.1); }
+  }
+  @keyframes float3{
+    0%,100%{ transform: translate(-50%,-50%) scale(1); }
+    50%{ transform: translate(-60%,-40%) scale(1.2); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .blob{ animation:none !important; }
+  }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
+
+  nav{ position:sticky; top:0; z-index:10; background:rgba(11,11,20,.7); backdrop-filter:blur(12px); border-bottom:1px solid var(--panel-line); }
+  nav .wrap{ display:flex; align-items:center; justify-content:center; padding:18px 32px; }
+  .nav-links{ display:flex; gap:26px; font-size:13px; flex-wrap:wrap; }
+  .nav-links a{ color:var(--muted); transition:color .2s; }
+  .nav-links a:hover{ color:var(--teal); }
+
+  /* HERO — centered */
+  .hero{ padding:100px 0 60px; text-align:center; display:flex; flex-direction:column; align-items:center; }
+
+  h1.name{
+    font-family:'Space Grotesk'; font-weight:700; font-size:clamp(42px,7vw,76px); line-height:1.05; letter-spacing:-.01em;
+    background: linear-gradient(90deg, var(--violet), var(--teal));
+    -webkit-background-clip: text; background-clip:text; color:transparent;
+  }
+  .role-line{ font-family:'JetBrains Mono'; font-weight:500; font-size:clamp(14px,2vw,16px); color:var(--muted); margin-top:18px; max-width:640px; }
+
+  .quick-actions{ display:flex; gap:16px; margin-top:36px; flex-wrap:wrap; justify-content:center; }
+  .btn{
+    font-family:'JetBrains Mono'; font-size:13px; padding:12px 22px; border-radius:10px;
+    border:1px solid var(--panel-line); transition: all .2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{ background: linear-gradient(90deg, var(--violet), var(--teal)); color:#0B0B14; border-color:transparent; font-weight:600; }
+  .btn-primary:hover{ opacity:0.9; transform: translateY(-1px); }
+  .btn-outline{ color:var(--text); background: var(--panel); }
+  .btn-outline:hover{ border-color:var(--teal); color:var(--teal); }
+
+  .profile-row{ display:flex; gap:14px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
+  .profile-chip{
+    font-family:'JetBrains Mono'; font-size:12px; color:var(--muted); padding:8px 14px;
+    border:1px solid var(--panel-line); background:var(--panel); border-radius:20px; transition: all .2s;
+  }
+  .profile-chip:hover{ color:var(--teal); border-color:var(--teal); }
+
+  section{ padding:70px 0; border-top:1px solid var(--panel-line); }
+  h2.section-title{ font-family:'Space Grotesk'; font-size:clamp(26px,3.5vw,34px); font-weight:600; margin-bottom:36px; }
+
+  /* ABOUT */
+  .about-panel{
+    background: var(--panel); border:1px solid var(--panel-line); border-radius:16px; padding:36px;
+    backdrop-filter: blur(6px);
+  }
+  .about-panel p{ color:var(--text); font-size:16px; max-width: 720px; }
+  .about-panel .highlight{ color: var(--teal); font-weight:600; }
+
+  /* SKILLS — 4 blocks */
+  .skill-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .skill-block{
+    background: var(--panel); border:1px solid var(--panel-line); border-radius:14px; padding:22px;
+    transition: transform .2s, border-color .2s;
+  }
+  .skill-block:hover{ transform: translateY(-4px); border-color: var(--teal); }
+  .skill-block .skill-head{
+    font-family:'Space Grotesk'; font-size:14px; font-weight:600;
+    background: linear-gradient(90deg, var(--violet), var(--teal));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin-bottom:14px;
+  }
+  .skill-block ul{ list-style:none; }
+  .skill-block li{ font-size:13.5px; color:var(--text); padding:6px 0; border-bottom:1px dashed var(--panel-line); }
+  .skill-block li:last-child{ border-bottom:none; }
+  @media (max-width:900px){ .skill-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .skill-grid{ grid-template-columns:1fr; } }
+
+  /* PROJECTS */
+  .project{ background:var(--panel); border:1px solid var(--panel-line); border-radius:14px; padding:28px 30px; margin-bottom:20px; transition: border-color .2s, transform .2s; backdrop-filter: blur(6px); }
+  .project:hover{ border-color:var(--teal); transform: translateY(-2px); }
+  .project-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; }
+  .project-name{ font-family:'Space Grotesk'; font-size:20px; font-weight:600; }
+  .project-status{ font-family:'JetBrains Mono'; font-size:11px; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:.05em; white-space:nowrap; }
+  .status-live{ background:rgba(63,220,200,.14); color:var(--teal); border:1px solid rgba(63,220,200,.35); }
+  .project-desc{ color:var(--muted); margin-top:12px; font-size:15px; max-width:680px; }
+  .project-stack{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .chip{ font-family:'JetBrains Mono'; font-size:11px; color:var(--text); background:rgba(255,255,255,.05); border:1px solid var(--panel-line); padding:4px 10px; border-radius:6px; }
+  .project-link{ display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-family:'JetBrains Mono'; font-size:13px; color:var(--teal); }
+  .project-link:hover{ text-decoration: underline; }
+
+  /* LISTS */
+  .list-item{ display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--panel-line); font-size:14px; }
+  .list-item .idx{ font-family:'JetBrains Mono'; color:var(--teal); font-size:13px; flex-shrink:0; }
+
+  /* CONTACT */
+  .contact-panel{ background: var(--panel); border:1px solid var(--panel-line); border-radius:16px; padding:40px; text-align:center; backdrop-filter: blur(6px); }
+  .contact-details{ margin-top:18px; display:flex; flex-direction:column; gap:8px; font-family:'JetBrains Mono'; font-size:14px; color:var(--text); }
+  .contact-links{ display:flex; justify-content:center; gap:16px; margin-top:24px; flex-wrap:wrap; }
+  .contact-links a{ font-family:'JetBrains Mono'; font-size:13px; color:var(--teal); border:1px solid rgba(63,220,200,.35); padding:10px 18px; border-radius:8px; transition: background .2s; background: rgba(63,220,200,.06); }
+  .contact-links a:hover{ background:rgba(63,220,200,.15); }
+
+  footer{ text-align:center; padding:30px 0; color:var(--muted); font-size:12px; font-family:'JetBrains Mono'; border-top:1px solid var(--panel-line); }
+</style>
+</head>
+<body>
+
+<div class="aurora">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certs">Certifications</a>
+      <a href="#roles">Roles</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <h1 class="name">Jennifer Shalom</h1>
+  <p class="role-line">🤖 AI/ML Enthusiast | 💻 Full Stack Developer</p>
+
+  <div class="quick-actions">
+    <a href="#projects" class="btn btn-outline">View Projects →</a>
+    <a href="resume.pdf" download class="btn btn-primary">⬇ Download Resume</a>
+  </div>
+
+  <div class="profile-row">
+    <a class="profile-chip" href="https://github.com/jennifer2006-github" target="_blank">GitHub ↗</a>
+    <a class="profile-chip" href="https://www.linkedin.com/in/shaganti-jennifer-shalom" target="_blank">LinkedIn ↗</a>
+    <a class="profile-chip" href="https://leetcode.com/u/jennifer_leet/" target="_blank">LeetCode ↗</a>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-panel">
+      <p>I'm <span class="highlight">Jennifer Shalom</span>, a final-year B.E. Information Technology student at CBIT, Hyderabad, with a CGPA of 9.13/10. I build AI-driven systems spanning Generative AI, Agentic AI, and full-stack development — from RAG pipelines to real-time multi-agent applications.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skill-grid">
+      <div class="skill-block">
+        <div class="skill-head">AI / ML / Gen AI</div>
+        <ul>
+          <li>Machine Learning & Deep Learning</li>
+          <li>Generative AI & LLMs</li>
+          <li>Agentic AI & Multi-Agent Systems</li>
+          <li>RAG Pipelines</li>
+          <li>LangGraph Orchestration</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <div class="skill-head">Full-Stack Engineering</div>
+        <ul>
+          <li>Python</li>
+          <li>FastAPI / Flask</li>
+          <li>React.js / MERN Stack</li>
+          <li>REST API Design</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <div class="skill-head">Data & Storage</div>
+        <ul>
+          <li>PostgreSQL</li>
+          <li>MongoDB</li>
+          <li>FAISS</li>
+          <li>ChromaDB</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <div class="skill-head">Core CS & Tools</div>
+        <ul>
+          <li>Data Structures & Algorithms</li>
+          <li>OS · DBMS · CN · OOP</li>
+          <li>Git & GitHub</li>
+          <li>Netlify</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-name">InvoSense</div>
+        <div class="project-status status-live">Shipped</div>
+      </div>
+      <p class="project-desc">A RAG-based invoice intelligence engine using transformer-based document understanding to extract, classify, and verify financial documents at scale.</p>
+      <div class="project-stack">
+        <span class="chip">LayoutLMv3</span><span class="chip">ChromaDB</span><span class="chip">FastAPI</span><span class="chip">React.js</span>
+      </div>
+      <a class="project-link" href="https://github.com/jennifer2006-github/InvoSense" target="_blank">Know more on GitHub →</a>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-name">AeroTrack</div>
+        <div class="project-status status-live">Shipped</div>
+      </div>
+      <p class="project-desc">A real-time aviation search-and-rescue platform streaming live ADS-B telemetry, running anomaly detection and dead-reckoning, with Claude-generated situational briefings.</p>
+      <div class="project-stack">
+        <span class="chip">Flask</span><span class="chip">Flask-SocketIO</span><span class="chip">Leaflet.js</span><span class="chip">OpenSky API</span><span class="chip">Claude API</span>
+      </div>
+      <a class="project-link" href="https://github.com/jennifer2006-github/aerotrack" target="_blank">Know more on GitHub →</a>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-name">Gesture Mouse – AI Virtual Mouse Controller</div>
+        <div class="project-status status-live">Shipped</div>
+      </div>
+      <p class="project-desc">Developed an AI-powered virtual mouse that enables users to control the computer cursor using hand gestures captured through a webcam. Leveraged computer vision and hand-tracking techniques to replace the traditional mouse with touch-free interaction.</p>
+      <div class="project-stack">
+        <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">MediaPipe</span><span class="chip">PyAutoGUI</span><span class="chip">NumPy</span>
+      </div>
+      <a class="project-link" href="https://github.com/jennifer2006-github/Gestured_control_virtual_mouse" target="_blank">Know more on GitHub →</a>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div class="project-name">WanderTales</div>
+        <div class="project-status status-live">Shipped</div>
+      </div>
+      <p class="project-desc">A full-stack travel blogging platform built on the MERN stack, supporting rich storytelling with authenticated publishing.</p>
+      <div class="project-stack">
+        <span class="chip">MongoDB</span><span class="chip">Express</span><span class="chip">React</span><span class="chip">Node.js</span>
+      </div>
+      <a class="project-link" href="https://github.com/jennifer2006-github/wandertales" target="_blank">Know more on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <h2 class="section-title">Certifications</h2>
+    <div class="list-item"><span class="idx">01</span> Salesforce Agentforce Specialist</div>
+    <div class="list-item"><span class="idx">02</span> MongoDB Associate Developer</div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="wrap">
+    <h2 class="section-title">Roles & Responsibilities</h2>
+    <div class="list-item"><span class="idx">01</span> Placement Coordinator, CBIT</div>
+    <div class="list-item"><span class="idx">02</span> PR Head, HICON Club</div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <h2 class="section-title" style="margin-bottom:8px;">Get in Touch</h2>
+      <p style="color:var(--muted);">Available for full-time roles, internships, and collaborations in AI/ML engineering.</p>
+      <div class="contact-details">
+        <span>📞 6303751045</span>
+        <span>✉️ jennifershalom02@gmail.com</span>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:jennifershalom02@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/shaganti-jennifer-shalom" target="_blank">LinkedIn</a>
+        <a href="https://github.com/jennifer2006-github" target="_blank">GitHub</a>
+        <a href="https://leetcode.com/u/jennifer_leet/" target="_blank">LeetCode</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Jennifer Shalom</footer>
+
+</body>
+</html>
